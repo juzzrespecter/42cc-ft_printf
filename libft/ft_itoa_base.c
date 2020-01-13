@@ -1,65 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/09 18:43:43 by danrodri          #+#    #+#             */
+/*   Updated: 2020/01/13 12:31:22 by danrodri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-static int abase(long i, char *base)
+static int ft_get_isize(long int i, int bsize)
 {
-  int asize;
-  int bsize;
+	int isize;
 
-  bsize = ft_strlen(base);
-  asize = 0;
-  if (i < 0)
-    asize++;
-  while (i /= bsize)
-      asize++;
-  asize++;
-  return (asize);
+	isize = 0;
+	while (i)
+		{
+			i /= bsize;
+			isize++;
+		}
+	return (isize);
 }
 
-char *ft_rev_array(char *array)
+static char *ft_rev_a(char *a)
 {
-  char aux;
-  int i;
-  int imax;
+	int a_len;
+	int i;
+	char aux;
 
-  i = 0;
-  imax = ft_strlen(array) - 1;
-  while (i < imax / 2)
-    {
-      aux = array[i];
-      array[i] = array[imax - i];
-      array[imax - i] = aux;
-      i++;
-    }
-  return (array);
+	a_len = ft_strlen(a);
+	i = 0;
+	while (i < a_len / 2)
+		{
+			aux = a[i];
+			a[i] = a[a_len - (i + 1)];
+			a[a_len - (i + 1)] = aux;
+			i++;
+		}
+	return (a);
 }
 
-char *ft_itoa_base(long i, char *base)
+static int ft_check_base(char *base)
 {
-  char *a;
-  size_t cont;
-  size_t asize;
-  size_t bsize;
+	int count;
 
-  bsize = ft_strlen(base);
-  asize = abase(i, base);
-  if (!(a = malloc(sizeof(char) * (asize + 1))))
-    return (NULL);
-  cont = 0;
-  if (i < 0)
-    {
-      a[cont] = '-';
-      i *= -1;
-      cont++;
-    }
-  while (cont < asize)
-    {
-      a[cont] = base[i % bsize];
-      i /= bsize;
-      cont++;
-    }
-  a[cont] = 0;
-  ft_rev_array(a);
-  return (a);
+	count = 0;
+	if (!base || ft_strlen(base) == 1)
+		return (0);
+	while (base[count])
+		{
+			if (ft_strchr(base + count + 1, base[count]))
+				return (0);
+			count++;
+		}
+	return (1);
+}
+
+char	*ft_itoa_base(long int i, char *base)
+{
+	char *a;
+	int count;
+	int b_len;
+
+	if (!ft_check_base(base))
+		return (NULL);
+	b_len = ft_strlen(base);
+	if (!(a = malloc(sizeof(char) * (ft_get_isize(i, b_len) + 1))))
+		return (NULL);
+	count = 0;
+	while (i)
+		{
+			a[count] = base[i % b_len];
+			i /= b_len;
+			count++;
+		}
+	a[count] = 0;
+	ft_rev_a(a);
+	return (a);
 }

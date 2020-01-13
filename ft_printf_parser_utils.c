@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_printf_parser_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:35:31 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/09 19:38:53 by danrodri         ###   ########.fr       */
+/*   Created: 2020/01/13 15:22:32 by danrodri          #+#    #+#             */
+/*   Updated: 2020/01/13 18:44:28 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void ft_putstr(char *str)
+void	reset_flags(l_flags *flags)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-		{
-			ft_putchar(str[i]);
-			i++;
-		}
+	flags->minus = false;
+	flags->plus = false;
+	flags->space = false;
+	flags->htg = false;
+	flags->zero = false;
+	flags->ap = false;
+	flags->width = 0;
+	flags->prec = 0;
 }

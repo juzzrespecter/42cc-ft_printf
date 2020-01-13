@@ -1,29 +1,39 @@
-.PHONY:		all re bonus clear fclear
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: danrodri <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/01/09 18:05:59 by danrodri          #+#    #+#              #
+#    Updated: 2020/01/12 19:55:32 by danrodri         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
+
+.PHONY:		all clean fclean re bonus
 
 NAME		= libftprintf.a
 
-SRCS		= ft_printf.c ft_printf_parse.c writefuncs.c
+SRCS		= ft_printf.c ft_printf_conv.c ft_printf_conv_2.c ft_printf_parser.c ft_printf_conv_utils.c
 
 OBJS		= $(SRCS:.c=.o)
 
-RM		= rm -f
-
 CFLAGS		= -Wall -Werror -Wextra
+
+RM		= rm -f
 
 $(NAME):
 		@make -C libft
-		@cp libft/libft.a ./libftprintf.a
-		@gcc $(CFLAGS) -c $(SRCS)
+		@mv libft/libft.a ./$(NAME)
+		@cc $(CFLAGS) -c $(SRCS)
 		@ar rcs $(NAME) $(OBJS)
 
 all:		$(NAME)
 
 clean:
-		@make clean -C libft
 		@$(RM) $(OBJS)
 
 fclean:		clean
-		@make fclean -C libft
 		@$(RM) $(NAME)
 
 re:		fclean all
