@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:43:43 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/13 12:31:22 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/20 12:09:20 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ static int ft_get_isize(long int i, int bsize)
 	int isize;
 
 	isize = 0;
+	if (i < 0)
+		{
+			isize++;
+			i *= -1;
+		}
 	while (i)
 		{
 			i /= bsize;
@@ -61,22 +66,34 @@ static int ft_check_base(char *base)
 	return (1);
 }
 
-char	*ft_itoa_base(long int i, char *base)
+char	*ft_lltoa_base(long long int i, char *base)
 {
 	char *a;
 	int count;
 	int b_len;
+	int neg;
 
+	neg = 0;
 	if (!ft_check_base(base))
 		return (NULL);
 	b_len = ft_strlen(base);
 	if (!(a = malloc(sizeof(char) * (ft_get_isize(i, b_len) + 1))))
 		return (NULL);
 	count = 0;
+	if (i < 0)
+		{
+			neg = 1;
+			i *= -1;
+		}
 	while (i)
 		{
 			a[count] = base[i % b_len];
 			i /= b_len;
+			count++;
+		}
+	if (neg)
+		{
+			a[count] = '-';
 			count++;
 		}
 	a[count] = 0;

@@ -5,44 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:06:43 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/13 18:44:53 by danrodri         ###   ########.fr       */
+/*   Created: 2020/01/16 16:06:30 by danrodri          #+#    #+#             */
+/*   Updated: 2020/01/21 14:57:31 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include <stdlib.h>
 # include <stdarg.h>
+# include <stdlib.h>
 # include <unistd.h>
-#include <stdio.h>
 # include <stdbool.h>
+#include <stdio.h>
 # include "libft/libft.h"
 typedef struct s_flags{
 	bool minus;
 	bool plus;
 	bool space;
-	bool htg;
 	bool zero;
 	bool ap;
-	int width;
+	bool h;
+	bool hh;
+	bool l;
+	bool ll;
+	bool htg;
 	int prec;
-} l_flags;
-int	ft_printf(char *fmt, ...);
-int print_ptr(va_list arg, l_flags *flags);
-int print_int(va_list arg, l_flags *flags);
-int print_hex(va_list arg, int type, l_flags *flags);
-int print_u(va_list arg, l_flags *flags);
-int print_char(va_list arg, l_flags *flags);
-int print_str(va_list arg, l_flags *flags);
-int	ft_printf_parser(char *fmt, l_flags *flags, va_list arg);
-int	flags_parser(char *fmt, l_flags *flags);
-int width_parser(char *fmt, l_flags *flags, va_list arg);
-int precision_parser(char *fmt, l_flags *flags, va_list arg);
-void reset_flags(l_flags *flags);
-int ft_printf_writer(char type, l_flags *flags, va_list arg);
-int int_width_writer(int str_len, l_flags *flags);
-int	char_width_writer(int str_len, int width);
-int prec_writer(int str_len, int zeros);
-
+	int width;
+} f_list;
+int ft_printf(char *fmt, ...);
+char *ft_ulltoa_base(unsigned long long int, char *base);
+int write_dec(va_list vars, f_list *flags);
+int write_udec(va_list vars, f_list *flags);
+int write_char(va_list vars, f_list *flags);
+int write_str(va_list vars, f_list *flags);
+int write_ptr(va_list vars, f_list *flags);
+int write_hex(va_list vars, char cap, f_list *flags);
+int write_percent(f_list *flags);
+int write_n(va_list vars, f_list *flags, int c_written);
+int get_flags(f_list *flags, char *fmt);
+int get_width(f_list *flags, char *fmt, va_list vars);
+int get_prec(f_list *flags, char *fmt, va_list vars);
+int get_lenfield(f_list *flags, char *fmt);
+int	read_specifier(char spec, va_list vars, f_list *flags, int c_written);
+int utils_ap_size(int len);
+char *u8_encoder(wchar_t u8char);
 #endif

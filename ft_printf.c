@@ -5,38 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:07:41 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/12 19:35:31 by danrodri         ###   ########.fr       */
+/*   Created: 2020/01/17 17:00:38 by danrodri          #+#    #+#             */
+/*   Updated: 2020/01/17 18:42:01 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(char *fmt, ...)
+static void reset_flags(f_list *flags)
 {
-	va_list arg;
-	l_flags	flags;
-	int			c_printed;
-	int			i;
+	flags->minus = false;
+	flags->plus = false;
+	flags->space = false;
+	flags->zero = false;
+	flags->ap = false;
+	flags->hh = false;
+	flags->h = false;
+	flags->l = false;
+	flags->ll = false;
+	flags->htg = false;
+	flags->prec = -1;
+	flags->width = 0;
+}
 
-	c_printed = 0;
-	i = 0;
-	va_start(arg, fmt);
-	while (fmt[i])
+int ft_printf(char *fmt, ...)
+{
+	f_list flags;
+	va_list vars;
+	int c_written;
+	int count;
+
+	c_written = 0;
+	count = 0;
+	va_start(vars, fmt);
+	while (fmt[count])
 		{
-			if (fmt[i] == '%')
+			if (fmt[count] == '%')
 				{
-					i++;
-					i += ft_printf_parser(fmt + i, &flags, arg);
-					c_printed += ft_printf_writer(fmt[i], &flags, arg);
-					i++;
+					count++;
+					reset_flags(&flags);
+					count += get_flags(&flags, fmt + count);
+					count += get_width(&flags, fmt + count, vars);
+					count += get_prec(&flags, fmt + count, vars);
+					count += get_lenfield(&flags, fmt + count);
+					c_written += read_specifier(fmt[count], vars, &flags, c_written);
 				}
 			else
-				{
-					write(1, &fmt[i], 1);
-					i++;
-					c_printed++;
-				}
+				c_written += write(1, &fmt[count], 1);
+			count++;
 		}
-	return (c_printed);
+	return (c_written);
 }
