@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:34:14 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/22 15:02:04 by danrodri         ###   ########.fr       */
+/*   Created: 2019/11/18 21:09:33 by danrodri          #+#    #+#             */
+/*   Updated: 2019/11/18 21:30:27 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_putstr_fd(char *s, int fd)
 {
-	write(1, &c, 1);
+	if (s)
+		write(fd, s, ft_strlen(s));
 }

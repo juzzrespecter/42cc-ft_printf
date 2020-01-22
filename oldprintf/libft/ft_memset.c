@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:34:14 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/22 15:02:04 by danrodri         ###   ########.fr       */
+/*   Created: 2019/11/05 13:39:35 by danrodri          #+#    #+#             */
+/*   Updated: 2019/11/05 13:53:43 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <string.h>
 
-void	ft_putchar(char c)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	write(1, &c, 1);
+	char *str;
+
+	str = b;
+	while (len--)
+	{
+		*str = (unsigned char)c;
+		str++;
+	}
+	return (b);
 }

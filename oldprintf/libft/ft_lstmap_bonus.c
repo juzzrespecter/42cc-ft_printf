@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   new_lstmap_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:34:14 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/22 15:02:04 by danrodri         ###   ########.fr       */
+/*   Created: 2019/11/18 13:15:06 by danrodri          #+#    #+#             */
+/*   Updated: 2019/11/18 19:00:18 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
+#include "libft.h"
 
-void	ft_putchar(char c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	write(1, &c, 1);
+	t_list	*alst;
+	t_list	*nlst;
+
+	if (!lst)
+		return (NULL);
+	alst = NULL;
+	while (lst)
+	{
+		nlst = ft_lstnew(ft_strdup(lst->content));
+		if (!nlst)
+			return (NULL);
+		if (!(nlst->content = f(nlst->content)))
+			del(nlst->content);
+		ft_lstadd_back(&alst, nlst);
+		lst = lst->next;
+	}
+	return (alst);
 }

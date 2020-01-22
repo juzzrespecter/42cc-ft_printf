@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:34:14 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/22 15:02:04 by danrodri         ###   ########.fr       */
+/*   Created: 2019/11/09 19:32:08 by danrodri          #+#    #+#             */
+/*   Updated: 2019/11/11 14:58:58 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-void	ft_putchar(char c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	write(1, &c, 1);
+	if (!lst)
+		return (lst);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }

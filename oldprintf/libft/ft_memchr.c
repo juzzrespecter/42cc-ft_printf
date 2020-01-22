@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 18:34:14 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/22 15:02:04 by danrodri         ###   ########.fr       */
+/*   Created: 2019/11/05 14:45:36 by danrodri          #+#    #+#             */
+/*   Updated: 2019/11/11 20:49:27 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <string.h>
 
-void	ft_putchar(char c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	write(1, &c, 1);
+	const unsigned char *mem;
+
+	mem = s;
+	while (n)
+	{
+		if (*mem == (unsigned char)c)
+			return ((void *)mem);
+		mem++;
+		n--;
+	}
+	return (NULL);
 }

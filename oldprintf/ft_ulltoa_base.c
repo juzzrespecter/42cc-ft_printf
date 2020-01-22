@@ -6,48 +6,46 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:43:43 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/22 17:20:44 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/17 18:18:58 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-static int	get_alen(long int i, int bsize)
+static int ft_get_isize(long int i, int bsize)
 {
 	int isize;
 
 	isize = 0;
-	if (i < 0)
-	{
-		isize++;
-		i *= -1;
-	}
 	while (i)
-	{
-		i /= bsize;
-		isize++;
-	}
+		{
+			i /= bsize;
+			isize++;
+		}
 	return (isize);
 }
 
-static char	fillintheblanks(long long int i, int a_pos, int b_len)
+static char *ft_rev_a(char *a)
 {
-	int	count;
+	int a_len;
+	int i;
+	char aux;
 
-	if (i < 0)
-		return ('-');
-	count = 0;
-	while (count < a_pos)
-	{
-		count++;
-		i /= b_len;
-	}
-	return (i % b_len);
+	a_len = ft_strlen(a);
+	i = 0;
+	while (i < a_len / 2)
+		{
+			aux = a[i];
+			a[i] = a[a_len - (i + 1)];
+			a[a_len - (i + 1)] = aux;
+			i++;
+		}
+	return (a);
 }
 
-static int	check_base(char *base)
+static int ft_check_base(char *base)
 {
 	int count;
 
@@ -55,39 +53,33 @@ static int	check_base(char *base)
 	if (!base || ft_strlen(base) == 1)
 		return (0);
 	while (base[count])
-	{
-		if (ft_strchr(base + count + 1, base[count]))
-			return (0);
-		count++;
-	}
+		{
+			if (ft_strchr(base + count + 1, base[count]))
+				return (0);
+			count++;
+		}
 	return (1);
 }
 
-char		*ft_lltoa_base(long long int i, char *base)
+char	*ft_ulltoa_base(unsigned long long int i, char *base)
 {
-	char	*a;
-	int		a_len;
-	int		count;
-	int		b_len;
+	char *a;
+	int count;
+	int b_len;
 
-	if (!check_base(base))
+	if (!ft_check_base(base))
 		return (NULL);
 	b_len = ft_strlen(base);
-	a_len = get_alen(i, b_len);
-	if (!(a = malloc(sizeof(char) * (a_len + 1))))
+	if (!(a = malloc(sizeof(char) * (ft_get_isize(i, b_len) + 1))))
 		return (NULL);
 	count = 0;
-	if (i < 0)
-	{
-		a[a_len - 1] = '-';
-		i *= -1;
-	}
 	while (i)
-	{
-		a[count] = base[fillintheblanks(i, count, b_len)];
-		i /= b_len;
-		count++;
-	}
-	a[a_len] = 0;
+		{
+			a[count] = base[i % b_len];
+			i /= b_len;
+			count++;
+		}
+	a[count] = 0;
+	ft_rev_a(a);
 	return (a);
 }
