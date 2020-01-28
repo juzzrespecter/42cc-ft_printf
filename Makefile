@@ -6,7 +6,7 @@
 #    By: danrodri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/17 18:02:40 by danrodri          #+#    #+#              #
-#    Updated: 2020/01/28 13:25:17 by danrodri         ###   ########.fr        #
+#    Updated: 2020/01/28 19:19:19 by danrodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ SRCS		= ft_printf.c
 
 SRCS_DIR	= srcs/
 
-SRCS_TYPE	= xX_type.c \
+SRCS_TYPE	= x_type.c \
 			d_type.c \
 			c_type.c \
 			p_type.c \

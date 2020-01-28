@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:16:41 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/26 20:23:07 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:16:03 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	*ft_strcap(char *str)
 
 	i = 0;
 	while (str[i])
-		{
-			if (ft_isalpha(str[i]) && str[i] >= 'a')
-				str[i] -= 32;
-			i++;
-		}
+	{
+		if (ft_isalpha(str[i]) && str[i] >= 'a')
+			str[i] -= 32;
+		i++;
+	}
 	return (str);
 }

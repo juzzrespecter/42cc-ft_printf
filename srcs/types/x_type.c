@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xX_type.c                                          :+:      :+:    :+:   */
+/*   x_type.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 20:09:58 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/27 19:40:43 by danrodri         ###   ########.fr       */
+/*   Created: 2020/01/28 19:08:52 by danrodri          #+#    #+#             */
+/*   Updated: 2020/01/28 19:23:33 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int	hex_zeros(int len, t_flst *flags)
 	return (i);
 }
 
-int			xX_type(va_list vars, char cap, t_flst *flags)
+int			x_type(va_list vars, char cap, t_flst *flags)
 {
-	int						count;
-	int						hex_len;
-	char					*hex_str;
+	int				count;
+	int				hex_len;
+	char			*hex_str;
 	unsigned int	hex;
 
 	count = 0;

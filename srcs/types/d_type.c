@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 19:26:29 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/28 18:22:36 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:20:44 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@ static int	dec_minfieldwidth(int len, int i, t_flst *flags)
 	int prec;
 
 	count = 0;
-	(i < 0) ? (i_neg = 1) : (i_neg = 0);
-	(flags->width && !flags->zero) ? (width = flags->width) : (width = 0);
-	(flags->prec[0] && flags->prec[1] > len) ? (prec = flags->prec[1]) : (prec = len);
+	i_neg = 0;
+	width = 0;
+	prec = len;
+	if (i < 0)
+		i_neg = 1;
+	if (flags->width && !flags->zero)
+		width = flags->width;
+	if (flags->prec[0] && flags->prec[1] > len)
+		prec = flags->prec[1];
 	if (flags->prec[0] == -1 && !i)
 		prec = 0;
 	while (count + i_neg + prec < width)
@@ -58,17 +64,19 @@ static int	dec_writer(char *str, int len, int i, t_flst *flags)
 
 int			d_type(va_list vars, t_flst *flags)
 {
-	int				count;
-	int	i;
-	int				i_len;
-	char			*i_str;
+	int		count;
+	int		i;
+	int		i_len;
+	char	*i_str;
 
 	count = 0;
 	i = va_arg(vars, int);
 	i_str = ft_itoa(i);
 	if (!(i_str))
 		return (0);
-	(i < 0) ? (i_len = ft_strlen(i_str) - 1) : (i_len = ft_strlen(i_str));
+	i_len = ft_strlen(i_str);
+	if (i < 0)
+		i_len -= 1;
 	if (!flags->minus)
 		count += dec_minfieldwidth(i_len, i, flags);
 	count += dec_writer(i_str, i_len, i, flags);

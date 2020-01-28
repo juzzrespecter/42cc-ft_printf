@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:53:26 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/28 18:12:01 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:15:21 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	minfieldwidth_format(t_flst *flags, char *fmt, va_list vars)
 
 	count = 0;
 	if (ft_isdigit(fmt[count]))
-		{
-			flags->width = ft_atoi(fmt);
-			while (ft_isdigit(fmt[count]))
-				count++;
-		}
+	{
+		flags->width = ft_atoi(fmt);
+		while (ft_isdigit(fmt[count]))
+			count++;
+	}
 	else if (fmt[count] == '*')
 	{
 		aux = va_arg(vars, int);
 		if (aux < 0)
-			{
-				aux *= -1;
-				flags->minus = true;
-				flags->zero = false;
-			}
-			flags->width = aux;
-			count++;
+		{
+			aux *= -1;
+			flags->minus = true;
+			flags->zero = false;
+		}
+		flags->width = aux;
+		count++;
 	}
 	return (count);
 }

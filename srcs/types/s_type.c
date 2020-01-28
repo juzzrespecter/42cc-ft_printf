@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 20:13:29 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/28 18:42:34 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:13:22 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ static int	str_writer(void *str, int len, t_flst *flags)
 
 static int	nullstr(t_flst *flags)
 {
-	char *str;
-	int	str_len;
-	int count;
+	char	*str;
+	int		str_len;
+	int		count;
 
 	count = 0;
 	str = ft_strdup("(null)");

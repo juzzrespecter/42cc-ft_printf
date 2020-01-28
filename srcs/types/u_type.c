@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 20:16:02 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/27 19:44:05 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:07:21 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static int	u_writer(char *str, int len, unsigned int u, t_flst *flags)
 
 int			u_type(va_list vars, t_flst *flags)
 {
-	int						count;
-	int						u_len;
+	int				count;
+	int				u_len;
 	unsigned int	u;
-	char					*u_str;
+	char			*u_str;
 
 	count = 0;
 	u = va_arg(vars, int);

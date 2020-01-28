@@ -6,13 +6,13 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 20:15:27 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/27 19:14:06 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/28 19:06:32 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libftprintf.h"
 
-static int	ptr_width_writer(int len,char *str,  t_flst *flags)
+static int	ptr_width_writer(int len, char *str, t_flst *flags)
 {
 	int i;
 
@@ -26,7 +26,7 @@ static int	ptr_width_writer(int len,char *str,  t_flst *flags)
 	return (i);
 }
 
-static int ptr_prec_writer(int len ,t_flst *flags)
+static int	ptr_prec_writer(int len, t_flst *flags)
 {
 	int i;
 
@@ -37,7 +37,7 @@ static int ptr_prec_writer(int len ,t_flst *flags)
 	return (i);
 }
 
-static int ptr_writer(int len, char *str, t_flst *flags)
+static int	ptr_writer(int len, char *str, t_flst *flags)
 {
 	int i;
 
