@@ -1,16 +1,13 @@
+#include "includes/libftprintf.h"
 #include <stdio.h>
-
-int main()
+#include <locale.h>
+#include <limits.h>
+int main(void)
 {
-	printf("%lu\n", sizeof(double));
+	int i1, i2;
+
+	i1 = printf("pr %*.*s\n",0,-5, "Hello");
+	i2 = ft_printf("ft %*.*s\n",0,-5, "Hello");
+
+	printf("pr %d, ft %d\n", i1, i2);
 }
-
-/*void test()
-{
-	int mantissa;
-	char exp;
-	float f = 345.345;
-	uint64_t 45;
-
-	mantissa = (int)((f >> 0) & )
-	}*/
