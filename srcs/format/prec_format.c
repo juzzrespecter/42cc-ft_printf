@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:49:37 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/28 19:15:03 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:14:38 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	prec_format(t_flst *flags, char *fmt, va_list vars)
 	if (fmt[count] == '.')
 	{
 		flags->prec[0] = 1;
-		flags->zero = false;
 		count++;
 		if (ft_isdigit(fmt[count]))
 		{
@@ -35,6 +34,8 @@ int	prec_format(t_flst *flags, char *fmt, va_list vars)
 		}
 		if (flags->prec[0] && !flags->prec[1])
 			flags->prec[0] = -1;
+		if (flags->prec[1] >= 0)
+			flags->zero = false;
 	}
 	return (count);
 }

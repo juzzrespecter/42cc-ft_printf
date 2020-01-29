@@ -6,7 +6,7 @@
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 20:16:02 by danrodri          #+#    #+#             */
-/*   Updated: 2020/01/28 19:07:21 by danrodri         ###   ########.fr       */
+/*   Updated: 2020/01/29 14:40:22 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	u_width_writer(int len, int u, t_flst *flags)
 	i = 0;
 	if (flags->prec[1] > len)
 		len = flags->prec[1];
-	if (flags->prec[0] && flags->prec[1] < 1 && !u)
+	if (flags->prec[0] == -1 && !u)
 		len = 0;
-	if (flags->zero && !flags->minus && flags->width && !flags->prec[0])
+	if (flags->zero && flags->width)
 		while (len + i < flags->width)
 			i += write(1, "0", 1);
 	if ((!flags->zero || flags->prec[0]) && flags->width)
@@ -46,7 +46,7 @@ static int	u_writer(char *str, int len, unsigned int u, t_flst *flags)
 	int count;
 
 	count = 0;
-	if (flags->prec[0] && flags->prec[1] < 1 && !u)
+	if (flags->prec[0] == -1 && !u)
 		return (0);
 	count += write(1, str, len);
 	return (count);
