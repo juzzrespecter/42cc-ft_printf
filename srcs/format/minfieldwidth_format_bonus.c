@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   minfieldwidth_format.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/01/24 18:53:26 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/02 18:54:44 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../includes/libftprintf_bonus.h"
 
-int	flag_format(t_flst *flags, char *fmt)
+int	minfieldwidth_format(t_flst *flags, char *fmt, va_list vars)
 {
 	int count;
+	int aux;
 
 	count = 0;
-	while (ft_strchr("0-", fmt[count]))
+	if (ft_isdigit(fmt[count]))
 	{
-		if (fmt[count] == '-')
+		flags->width = ft_atoi(fmt);
+		while (ft_isdigit(fmt[count]))
+			count++;
+	}
+	else if (fmt[count] == '*')
+	{
+		aux = va_arg(vars, int);
+		if (aux < 0)
+		{
+			aux *= -1;
 			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
+			flags->zero = false;
+		}
+		flags->width = aux;
 		count++;
 	}
-	if (flags->minus)
-		flags->zero = false;
 	return (count);
 }

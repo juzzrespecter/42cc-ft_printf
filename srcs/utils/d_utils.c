@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_type.c                                           :+:      :+:    :+:   */
+/*   d_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 19:26:29 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/03 20:09:34 by danrodri         ###   ########.fr       */
+/*   Created: 2020/01/30 14:12:04 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/03 20:02:53 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../includes/libftprintf_bonus.h"
 
-static int	dec_writer(char *str, int i, int len, t_flst *flags)
+int		dec_sign_writer(char *str, t_flst *flags)
+{
+	int count;
+
+	count = 0;
+	if (str[0] == '-')
+		count += write(1, "-", 1);
+	else
+	{
+		if (flags->plus)
+			count += write(1, "+", 1);
+		if (flags->space)
+			count += write(1, " ", 1);
+	}
+	return (count);
+}
+
+int		dec_writer(char *str, int len, t_flst *flags)
 {
 	int i_count;
 	int z_count;
@@ -21,15 +38,15 @@ static int	dec_writer(char *str, int i, int len, t_flst *flags)
 	i_count = 0;
 	z_count = 0;
 	z_len = 0;
-	if (flags->prec[0] == -1 && !i)
+	if (flags->prec[0] == -1 && !ft_strncmp(str, "0", len))
 		return (0);
 	if (flags->width && flags->zero)
 		z_len = flags->width - len;
 	if (flags->prec[0] && flags->prec[1] > len)
 		z_len = flags->prec[1] - len;
-	if (i < 0)
-		i_count += write(1, "-", 1);
-	if (flags->width && flags->zero && i < 0)
+	if (str[0] == '-')
+		i_count += dec_sign_writer(str, flags);
+	if (flags->width && flags->zero && str[0] == '-')
 		z_len--;
 	while (z_count < z_len)
 		z_count += write(1, "0", 1);
@@ -38,7 +55,22 @@ static int	dec_writer(char *str, int i, int len, t_flst *flags)
 	return (i_count + z_count);
 }
 
-int			dec_minfieldwidth(int len, int i, t_flst *flags)
+char	*dec_lenfield(va_list vars, t_flst *flags)
+{
+	char *i_str;
+
+	if (flags->hh)
+		return (i_str = ft_itoa((char)va_arg(vars, long long)));
+	if (flags->h)
+		return (i_str = ft_itoa((char)va_arg(vars, long long)));
+	if (flags->l)
+		return (i_str = ft_lltoa((long)va_arg(vars, long long)));
+	if (flags->ll)
+		return (i_str = ft_lltoa((long long)va_arg(vars, long long)));
+	return (i_str = ft_itoa(va_arg(vars, int)));
+}
+
+int		dec_minfieldwidth(int len, char *str, t_flst *flags)
 {
 	int i_neg;
 	int width;
@@ -49,39 +81,15 @@ int			dec_minfieldwidth(int len, int i, t_flst *flags)
 	i_neg = 0;
 	width = 0;
 	prec = len;
-	if (i < 0)
+	if (str[0] == '-')
 		i_neg = 1;
 	if (flags->width && !flags->zero)
 		width = flags->width;
 	if (flags->prec[0] && flags->prec[1] > len)
 		prec = flags->prec[1];
-	if (flags->prec[0] == -1 && !i)
+	if (flags->prec[0] == -1 && !ft_strncmp(str, "0", len))
 		prec = 0;
 	while (count + i_neg + prec < width)
 		count += write(1, " ", 1);
-	return (count);
-}
-
-int			d_type(va_list args, t_flst *flags)
-{
-	int		count;
-	int		i_len;
-	int		i;
-	char	*i_str;
-
-	count = 0;
-	i = va_arg(args, int);
-	i_str = ft_itoa(i);
-	if (!(i_str))
-		return (0);
-	i_len = ft_strlen(i_str);
-	if (i < 0)
-		i_len -= 1;
-	if (!flags->minus)
-		count += dec_minfieldwidth(i_len, i, flags);
-	count += dec_writer(i_str, i, i_len, flags);
-	if (flags->minus)
-		count += dec_minfieldwidth(i_len, i, flags);
-	free(i_str);
 	return (count);
 }

@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   n_type_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/02/02 19:34:27 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/02 19:48:10 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../../includes/libftprintf_bonus.h"
 
-int	flag_format(t_flst *flags, char *fmt)
+int	n_type(va_list args, t_flst *flags, int len)
 {
-	int count;
-
-	count = 0;
-	while (ft_strchr("0-", fmt[count]))
-	{
-		if (fmt[count] == '-')
-			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
-		count++;
-	}
-	if (flags->minus)
-		flags->zero = false;
-	return (count);
+	if (flags->hh)
+		*(va_arg(args, char *)) = len;
+	else if (flags->h)
+		*(va_arg(args, short *)) = len;
+	else if (flags->l)
+		*(va_arg(args, long *)) = len;
+	else if (flags->ll)
+		*(va_arg(args, long long *)) = len;
+	else
+		*(va_arg(args, int *)) = len;
+	return (0);
 }

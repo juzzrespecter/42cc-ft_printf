@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   c_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/02/01 17:32:49 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/01 18:41:23 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../includes/libftprintf_bonus.h"
 
-int	flag_format(t_flst *flags, char *fmt)
+int	char_width(t_flst *flags)
 {
 	int count;
 
 	count = 0;
-	while (ft_strchr("0-", fmt[count]))
-	{
-		if (fmt[count] == '-')
-			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
-		count++;
-	}
-	if (flags->minus)
-		flags->zero = false;
+	if (flags->width)
+		while (count + 1 < flags->width)
+			count += write(1, " ", 1);
 	return (count);
 }

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   per_type_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/02/03 18:43:05 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/03 18:43:08 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../../includes/libftprintf_bonus.h"
 
-int	flag_format(t_flst *flags, char *fmt)
+int	per_type(t_flst *flags)
 {
 	int count;
 
 	count = 0;
-	while (ft_strchr("0-", fmt[count]))
-	{
-		if (fmt[count] == '-')
-			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
-		count++;
-	}
-	if (flags->minus)
-		flags->zero = false;
+	if ((!flags->minus && !flags->zero) && flags->width)
+		while (count + 1 < flags->width)
+			count += write(1, " ", 1);
+	if (!flags->minus && flags->zero && flags->width)
+		while (count + 1 < flags->width)
+			count += write(1, "0", 1);
+	count += write(1, "%", 1);
+	if (flags->minus && flags->width)
+		while (count < flags->width)
+			count += write(1, " ", 1);
 	return (count);
 }

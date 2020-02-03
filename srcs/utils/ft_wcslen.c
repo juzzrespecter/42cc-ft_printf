@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   ft_wcslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/02/01 18:26:49 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/03 20:02:04 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include <stdlib.h>
 
-int	flag_format(t_flst *flags, char *fmt)
+int	ft_wcslen(wchar_t *wcs)
 {
-	int count;
+	int len;
 
-	count = 0;
-	while (ft_strchr("0-", fmt[count]))
-	{
-		if (fmt[count] == '-')
-			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
-		count++;
-	}
-	if (flags->minus)
-		flags->zero = false;
-	return (count);
+	len = 0;
+	while (wcs[len])
+		len++;
+	return (len);
 }

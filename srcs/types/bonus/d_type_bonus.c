@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   d_type_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/02/03 18:44:18 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/03 18:44:22 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../../includes/libftprintf_bonus.h"
 
-int	flag_format(t_flst *flags, char *fmt)
+int			d_type(va_list vars, t_flst *flags)
 {
-	int count;
+	int		count;
+	int		i_len;
+	char	*i_str;
 
 	count = 0;
-	while (ft_strchr("0-", fmt[count]))
-	{
-		if (fmt[count] == '-')
-			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
-		count++;
-	}
+	i_str = dec_lenfield(vars, flags);
+	if (!(i_str))
+		return (0);
+	i_len = ft_strlen(i_str);
+	if (i_str[0] == '-')
+		i_len -= 1;
+	if (!flags->minus)
+		count += dec_minfieldwidth(i_len, i_str, flags);
+	count += dec_writer(i_str, i_len, flags);
 	if (flags->minus)
-		flags->zero = false;
+		count += dec_minfieldwidth(i_len, i_str, flags);
+	free(i_str);
 	return (count);
 }

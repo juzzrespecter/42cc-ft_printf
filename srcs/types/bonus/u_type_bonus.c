@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_format.c                                      :+:      :+:    :+:   */
+/*   u_type_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danrodri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:46:51 by danrodri          #+#    #+#             */
-/*   Updated: 2020/02/01 17:41:51 by danrodri         ###   ########.fr       */
+/*   Created: 2020/02/03 18:44:44 by danrodri          #+#    #+#             */
+/*   Updated: 2020/02/03 18:44:45 by danrodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "../../../includes/libftprintf_bonus.h"
 
-int	flag_format(t_flst *flags, char *fmt)
+int			u_type(va_list vars, t_flst *flags)
 {
-	int count;
+	int				count;
+	int				u_len;
+	char			*u_str;
 
 	count = 0;
-	while (ft_strchr("0-", fmt[count]))
-	{
-		if (fmt[count] == '-')
-			flags->minus = true;
-		if (fmt[count] == '0')
-			flags->zero = true;
-		count++;
-	}
+	if (!(u_str = u_lenfield(vars, flags)))
+		return (0);
+	u_len = ft_strlen(u_str);
+	if (!flags->minus)
+		count += u_width(u_len, u_str, flags);
+	count += u_writer(u_str, u_len, flags);
 	if (flags->minus)
-		flags->zero = false;
+		count += u_width(u_len, u_str, flags);
+	free(u_str);
 	return (count);
 }
