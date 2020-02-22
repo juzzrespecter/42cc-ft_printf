@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
-#include "../libft/libft.h"
+#include "libft.h"
 #include "ten_powers.h"
 #include "minilib.h"
 # define M32 0xffffffff

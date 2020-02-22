@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libftprintf_bonus.h"
+#include "libftprintf_bonus.h"
 
 static void	reset_flags(t_flst *flags)
 {

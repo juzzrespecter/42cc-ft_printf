@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "libftprintf.h"
 
 int	prec_format(t_flst *flags, char *fmt, va_list vars)
 {

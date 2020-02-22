@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "libftprintf.h"
 
 static int	str_width_writer(int len, t_flst *flags)
 {

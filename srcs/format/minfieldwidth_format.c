@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf.h"
+#include "libftprintf.h"
 
 int	minfieldwidth_format(t_flst *flags, char *fmt, va_list vars)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf_bonus.h"
+#include "libftprintf_bonus.h"
 
 int		dec_sign_writer(char *str, t_flst *flags)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf_bonus.h"
+#include "libftprintf_bonus.h"
 
 int	char_width(t_flst *flags)
 {

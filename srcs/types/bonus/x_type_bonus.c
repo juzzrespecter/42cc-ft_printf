@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/libftprintf_bonus.h"
+#include "libftprintf_bonus.h"
 
 int			x_type(va_list vars, char cap, t_flst *flags)
 {

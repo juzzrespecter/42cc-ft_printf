@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libftprintf_bonus.h"
+#include "libftprintf_bonus.h"
 
 int		hex_width(int len, char *str, t_flst *flags)
 {

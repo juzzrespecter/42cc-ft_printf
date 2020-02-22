@@ -110,22 +110,22 @@ bonus:			$(OBJS_TBONUS)  $(OBJS_FBONUS) $(OBJS_UBONUS) $(OBJS_BONUS)
 				@ar rcs $(NAME) $(OBJS_TBONUS) $(OBJS_FBONUS) $(OBJS_UBONUS) $(OBJS_BONUS)
 
 $(OBJS_DIR)%.o:		$(SRCS_TYPE_DIR)%.c
-				@gcc $(FLAGS) -c -I$(INCL_DIR)libftprintf.h $<
+				@gcc $(FLAGS) -c -I$(INCL_DIR) $<
 				@mkdir -p $(OBJS_DIR)
 				@mv -f $(@F) $(OBJS_DIR)
 
 $(OBJS_DIR)%.o:		$(SRCS_FMT_DIR)%.c
-				@gcc $(FLAGS) -c -I$(INCL_DIR)libftprintf.h $<
+				@gcc $(FLAGS) -c -I$(INCL_DIR) $<
 				@mkdir -p $(OBJS_DIR)
 				@mv -f $(@F) $(OBJS_DIR)
 
 $(OBJS_DIR)%.o:		$(SRCS_UTILS_DIR)%.c
-				@gcc $(FLAGS) -c -I$(INCL_DIR)libftprintf.h $<
+				@gcc $(FLAGS) -c -I$(INCL_DIR) $<
 				@mkdir -p $(OBJS_DIR)
 				@mv -f $(@F) $(OBJS_DIR)
 
 $(OBJS_DIR)%.o:		$(SRCS_DIR)%.c
-				@gcc $(FLAGS) -c -I$(INCL_DIR)libftprintf.h $<
+				@gcc $(FLAGS) -c -I$(INCL_DIR) $<
 				@mkdir -p $(OBJS_DIR)
 				@mv -f $(@F) $(OBJS_DIR)
 
