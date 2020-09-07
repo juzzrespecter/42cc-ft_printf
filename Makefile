@@ -6,7 +6,7 @@
 #    By: danrodri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/17 18:02:40 by danrodri          #+#    #+#              #
-#    Updated: 2020/02/03 19:47:58 by danrodri         ###   ########.fr        #
+#    Updated: 2020/09/07 17:42:50 by danrodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -79,14 +79,6 @@ OBJS_UTILS		= $(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_UTILS))
 
 OBJS			= $(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS))
 
-OBJS_TBONUS		= $(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_TBONUS))
-
-OBJS_FBONUS		= $(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_FBONUS))
-
-OBJS_UBONUS		= $(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_UBONUS))
-
-OBJS_BONUS		= $(patsubst %.c,$(OBJS_DIR)%.o,$(SRCS_BONUS))
-
 OBJS_DIR		= objs/
 
 NAME			= libftprintf.a
@@ -103,11 +95,6 @@ $(NAME):		$(OBJS_TYPE) $(OBJS_FMT) $(OBJS_UTILS) $(OBJS)
 				@make -C libft
 				@mv libft/libft.a ./$(NAME)
 				@ar rcs $(NAME) $(OBJS_TYPE) $(OBJS_FMT) $(OBJS_UTILS) $(OBJS)
-
-bonus:			$(OBJS_TBONUS)  $(OBJS_FBONUS) $(OBJS_UBONUS) $(OBJS_BONUS)
-				@make -C libft
-				@mv libft/libft.a ./$(NAME)
-				@ar rcs $(NAME) $(OBJS_TBONUS) $(OBJS_FBONUS) $(OBJS_UBONUS) $(OBJS_BONUS)
 
 $(OBJS_DIR)%.o:		$(SRCS_TYPE_DIR)%.c
 				@gcc $(FLAGS) -c -I$(INCL_DIR) $<
@@ -129,11 +116,6 @@ $(OBJS_DIR)%.o:		$(SRCS_DIR)%.c
 				@mkdir -p $(OBJS_DIR)
 				@mv -f $(@F) $(OBJS_DIR)
 
-$(OBJS_DIR)%.o:		$(SRCS_TBONUS_DIR)%.c
-				@gcc $(FLAGS) -c -I$(INCL_DIR)libftprintf_bonus.h $<
-				@mkdir -p $(OBJS_DIR)
-				@mv -f $(@F) $(OBJS_DIR)
-
 clean:
 				@$(RM) $(OBJ_DIR) $(OBJS)
 				@$(RMDIR) $(OBJS_DIR)
@@ -150,4 +132,3 @@ normi:
 								$(SRCS_FMT_DIR)*.c \
 								$(SRCS_UTILS_DIR)*.c \
 								$(SRCS_TYPE_DIR)*.c \
-								$(SRCS_TBONUS_DIR)*.c
